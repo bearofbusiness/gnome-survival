@@ -1,10 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://8tr1ctl6l1u4"]
+[gd_scene load_steps=8 format=3 uid="uid://8tr1ctl6l1u4"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://sl87kkwtt3iq" path="res://Material/BasicMat.tres" id="1_ikqa3"]
+[ext_resource type="PackedScene" uid="uid://pyb7j1sh8rp6" path="res://Player.tscn" id="1_ylbeu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g3s1t"]
 size = Vector3(60, 2, 60)
 
 [sub_resource type="BoxMesh" id="BoxMesh_kgibt"]
 size = Vector3(60, 2, 60)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cm5vr"]
+albedo_color = Color(1, 0.141176, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rjdlt"]
+material = SubResource("StandardMaterial3D_cm5vr")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nh044"]
 
 [node name="TestWorld" type="Node3D"]
 
@@ -16,3 +27,19 @@ shape = SubResource("BoxShape3D_g3s1t")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
 mesh = SubResource("BoxMesh_kgibt")
+
+[node name="Player" parent="." instance=ExtResource("1_ylbeu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.91172, 0, 5.89297)
+
+[node name="TestBox" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.527986, 0)
+physics_material_override = ExtResource("1_ikqa3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TestBox"]
+mesh = SubResource("BoxMesh_rjdlt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestBox"]
+shape = SubResource("BoxShape3D_nh044")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.690643, 0.723196, 0, -0.723196, 0.690643, 0, 10.9555, 18.846)

@@ -13,6 +13,11 @@ enum PossableStates {SPRINT, WALK, CROUCH, CROUCH_WALK, IDLE}
 @export
 var _State := PossableStates.IDLE
 
+@export_group("Look Vars")
+
+@export_range(0, PI/2, PI/100)
+var maxVerticalRotation : float = PI/2;
+
 @export_group("Temp Look Vars")
 ##TODO remove this and make it global
 @export_range(0.001, 0.01, 0.001)
@@ -23,7 +28,7 @@ var rotX : float = 0
 		
 var rotY : float = 0:
 	set(value):
-		rotY = clamp(value, -PI/2, PI/2)
+		rotY = clamp(value, -maxVerticalRotation, maxVerticalRotation)
 
 @onready var camera = $Camera3D
 

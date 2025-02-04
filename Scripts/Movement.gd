@@ -55,4 +55,6 @@ func _unhandled_input(event: InputEvent):
 		transform.basis = Basis() # reset rotation
 		rotate_object_local(Vector3(0, 1, 0), rotX) # first rotate in Y
 		#rotate_object_local(Vector3(1, 0, 0), rotY) # then rotate in X
-		camera.rotation = Vector3(1, 0, 0) * clamp(rotY, -PI/2, PI/2)
+		rotY = clamp(rotY, -PI/2, PI/2)
+		camera.rotation = Vector3(1, 0, 0) * rotY
+		

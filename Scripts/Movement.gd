@@ -19,7 +19,11 @@ var _State := PossableStates.IDLE
 var sensitivity : float = 0.005
 
 var rotX : float = 0
-var rotY : float = 0
+
+		
+var rotY : float = 0:
+	set(value):
+		rotY = clamp(value, -PI/2, PI/2)
 
 @onready var camera = $Camera3D
 
@@ -54,7 +58,5 @@ func _unhandled_input(event: InputEvent):
 		rotY += event.relative.y * sensitivity * -1
 		transform.basis = Basis() # reset rotation
 		rotate_object_local(Vector3(0, 1, 0), rotX) # first rotate in Y
-		#rotate_object_local(Vector3(1, 0, 0), rotY) # then rotate in X
-		rotY = clamp(rotY, -PI/2, PI/2)
 		camera.rotation = Vector3(1, 0, 0) * rotY
 		
